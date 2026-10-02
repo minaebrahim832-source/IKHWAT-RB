@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>إخوة الرب — بحث الحالة</title>
+<style>
+:root{--ink:#1f2a37;--bg:#f3f5f7;--ac:#0f5c5c;--ln:#d5dbe0;--red:#b3261e}
+*{box-sizing:border-box}body{margin:0;font:15px/1.6 Tahoma,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--ac);color:#fff;padding:12px 16px}header h1{font-size:18px;margin:0}
+.test{background:#fff3cd;color:#664d03;padding:6px 16px;font-size:13px;text-align:center}
+main{max-width:980px;margin:0 auto;padding:14px}
+button,.btn{font:inherit;border:1px solid var(--ac);background:#fff;color:var(--ac);border-radius:6px;padding:6px 12px;cursor:pointer;display:inline-block}
+button.p{background:var(--ac);color:#fff}button.d{border-color:var(--red);color:var(--red)}
+:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+input,select,textarea{font:inherit;width:100%;padding:6px 8px;border:1px solid var(--ln);border-radius:6px;background:#fff}
+input.bad{border-color:var(--red);background:#fdecea}
+fieldset{background:#fff;border:1px solid var(--ln);border-radius:8px;margin:0 0 12px;padding:12px}
+legend{font-weight:700;color:var(--ac);padding:0 6px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+label{font-size:13px;display:block}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}td,th{border:1px solid var(--ln);padding:3px;font-size:13px;text-align:right}th{background:#eef2f4}
+.card{background:#fff;border:1px solid var(--ln);border-radius:8px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.tot{font-weight:700;margin-top:8px}
+fieldset{border-top:3px solid var(--ac);border-radius:8px}legend{padding:2px 10px;background:#e6f0ef;border-radius:4px;font-size:14px}
+label{color:#5b6773;font-size:12.5px}input,select,textarea{min-height:40px}button:disabled{opacity:.4;cursor:default}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}.top h2{margin:0;font-size:18px;flex:1;text-align:center}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:6px 0;margin-bottom:10px;position:sticky;top:0;background:var(--bg);z-index:2}
+.tabs button{white-space:nowrap;border-color:var(--ln);color:var(--ink)}.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.pg{display:none}.pg.on{display:block}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}@media(max-width:700px){.two{grid-template-columns:1fr}}
+.bar{position:sticky;bottom:0;display:flex;gap:8px;justify-content:space-between;background:#fff;border-top:1px solid var(--ln);padding:10px;margin:0 -14px -14px}
+#m{display:none;position:fixed;inset:0;background:#0006;align-items:center;justify-content:center;z-index:9}.mb{background:#fff;padding:16px;border-radius:8px;max-width:420px;width:90%;max-height:80vh;overflow:auto}.mb label{display:block;padding:4px 0}.mb input{width:auto;min-height:0}
+#pr{display:none}
+@media print{body>*:not(#pr){display:none!important}body{background:#fff}#pr{display:block;padding:8mm}#pr table{min-width:0}#pr td,#pr th{border-color:#000}#pr h2{margin:10px 0 4px;font-size:15px;border-bottom:2px solid #000}}
+</style></head><body>
+<header><h1>إخوة الرب — بحث الحالة</h1></header>
+<div class="test">نسخة تجريبية متوصّلة بسيرفر مقفول بتسجيل دخول. ادخل بيانات وهمية فقط لحد ما نخلص التجربة.</div>
+<main id="v"></main><div id="m"></div><div id="pr"></div>
+<datalist id="srcs"><option>تاكسي<option>كشك<option>محل<option>توك توك<option>فرشة<option>تريسكل<option>أنابيب بوتاجاز<option>معاش<option>مكنة خياطة وتطريز<option>ثلاجة مشروبات<option>تربية طيور</datalist>
+<script>
+window.onerror=(m,u,l)=>{document.body.insertAdjacentHTML('afterbegin','<div style="background:#fdecea;color:#b3261e;padding:8px">خطأ: '+m+' (سطر '+l+')</div>')};
+const $=s=>document.querySelector(s);
+const SB='https://fxaculrisziiacbxsssz.supabase.co',AK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ4YWN1bHJpc3ppaWFjYnhzc3N6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4NzcwNzksImV4cCI6MjEwNjQ1MzA3OX0.pO94gY-ubdbHh4WKeiZWNvVl4zEQ4mvsZMhIyvYMtGU';
+let S=JSON.parse(sessionStorage.getItem('ik_s')||'null'),me=null,db=[],reqs=[],cur=null,orig=null,cid=null,cst=null,flt='all';
+const ST={pending:'في الانتظار',returned:'مرجّعة للتعديل',approved:'معتمدة',rejected:'مرفوضة'};
+async function api(p,o={}){const r=await fetch(SB+p,{method:o.m||'GET',headers:{apikey:AK,Authorization:'Bearer '+(S?S.access_token:AK),'Content-Type':'application/json',Prefer:'return=representation'},body:o.b?JSON.stringify(o.b):undefined});
+ const t=await r.text(),j=t?JSON.parse(t):null;if(r.status==401&&S){logout('انتهت الجلسة، سجّل دخول تاني');throw new Error('401')}
+ if(!r.ok)throw new Error((j&&(j.message||j.msg||j.error_description))||r.status);return j}
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const num=v=>parseFloat(String(v||'').replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d.]/g,''))||0;
+const F1=[['n','الاسم'],['nick','اسم الشهرة'],['id','الرقم القومي (14 رقم)'],['job','الوظيفة'],['sal','المرتب'],['ph','تليفون / موبايل'],['cf','أب الاعتراف']];
+const SEC=[['بيانات الزوج',F1.map(([k,l])=>['h_'+k,l])],['بيانات الزوجة',F1.map(([k,l])=>['w_'+k,l])],
+['العنوان والسكن',[['addr','العنوان بالتفصيل'],['gov','المحافظة'],['dist','الحي'],['area','المنطقة'],['mark','علامة مميزة'],['house','السكن','sel'],['church','الكنيسة التابعة لها الأسرة']]],
+['الحالة الصحية والظروف',[['ill','أمراض','ta'],['dis','إعاقة'],['oth','ظروف أخرى','ta']]],
+['متابعة الحالة',[['priest','الأب الكاهن المسئول'],['d1','تاريخ بحث الحالة','date'],['d2','تاريخ تجديد البحث','date'],['no','رقم بحث الحالة']]]];
+const TB={children:['الأولاد',[['n','الاسم'],['id','الرقم القومي'],['ms','الحالة الاجتماعية'],['st','السنة الدراسية / الوظيفة'],['inc','الدخل'],['cf','أب الاعتراف']]],
+others:['أشخاص آخرون يقيمون مع الأسرة',[['n','الاسم'],['id','الرقم القومي'],['rel','صلة القرابة'],['ms','الحالة الاجتماعية'],['st','السنة الدراسية / الوظيفة'],['inc','الدخل']]],
+src:['مصادر الدخل الأساسية / الإضافية',[['n','المصدر'],['a','الدخل الشهري']]],
+aid:['مساعدات وشهريات الكنيسة',[['dt','التاريخ'],['n','البيان'],['a','المبلغ']]]};
+const CONT=['عدد الغرف','حمام خاص','سرير','غرفة صالون','دولاب','كنبة','بوتاجاز','غرفة سفرة','غسالة','تليفزيون','ثلاجة','تليفون','دش','مرتبة','موبايل','كمبيوتر','غرفة نوم'];
+const INC=[['i_help','مساعدات وشهريات الكنائس'],['i_med','مساعدات علاجية'],['i_sch','مساعدات خلال الدراسة'],['i_sal','المرتب الأساسي'],['i_pen','تكافل وكرامة (معاش)']];
+const EXP=[['e_util','كهرباء ومياه وغاز'],['e_ph','تليفون'],['e_rent','إيجار'],['e_med','علاج'],['e_st','دراسة']];
+const get=p=>p.split('.').reduce((o,k)=>o&&o[k],cur);
+function set(p,v){const a=p.split('.');let o=cur;a.slice(0,-1).forEach(k=>o=o[k]=o[k]||{});o[a[a.length-1]]=v}
+function fld(p,l,t){const v=esc(get(p));
+ if(t=='sel')return `<label>${l}<select data-p="${p}"><option value="">—</option>${['تمليك','إيجار قديم','إيجار جديد','مع الأسرة'].map(o=>`<option${get(p)==o?' selected':''}>${o}</option>`).join('')}</select></label>`;
+ if(t=='ta')return `<label>${l}<textarea rows="2" data-p="${p}">${v}</textarea></label>`;
+ return `<label>${l}<input data-p="${p}" type="${t||'text'}" value="${v}"${/_id$/.test(p)?' inputmode="numeric" maxlength="14"':''}></label>`}
+const sec=s=>`<fieldset><legend>${s[0]}</legend><div class="g">${s[1].map(([k,l,t])=>fld(k,l,t)).join('')}</div></fieldset>`;
+function tbl(t){const[h,cols]=TB[t];return `<fieldset><legend>${h}${t=='children'?' ('+cur.children.length+')':''}</legend><div class="tw"><table><tr>${cols.map(c=>'<th>'+c[1]+'</th>').join('')}<th></th></tr>${cur[t].map((x,i)=>'<tr>'+cols.map(([k])=>`<td><input data-p="${t}.${i}.${k}" value="${esc(x[k])}"${t=='src'&&k=='n'?' list="srcs"':''}></td>`).join('')+`<td><button class="d" data-del="${t}.${i}" aria-label="حذف الصف">×</button></td></tr>`).join('')}</table></div><p><button data-add="${t}">+ إضافة صف</button></p></fieldset>`}
+let tb=0;
+const TABS=['الزوجان','العنوان والمنزل','الأولاد والمقيمون','الصحة والدخل','المساعدات والمتابعة'];
+function showTab(i){tb=Math.max(0,Math.min(TABS.length-1,i));document.querySelectorAll('.pg').forEach((p,k)=>p.classList.toggle('on',k==tb));document.querySelectorAll('.tabs button').forEach((b,k)=>b.classList.toggle('on',k==tb));$('#prv').disabled=tb==0;$('#nxt').disabled=tb==TABS.length-1;scrollTo(0,0)}
+function draw(){const y=scrollY,pg=[
+ `<div class="two">${sec(SEC[0])}${sec(SEC[1])}</div>`,
+ sec(SEC[2])+`<fieldset><legend>محتويات المنزل (اكتب العدد، أو × لو غير موجود)</legend><div class="g">${CONT.map((n,i)=>fld('c.'+i,n)).join('')}</div></fieldset>`,
+ tbl('children')+tbl('others'),
+ sec(SEC[3])+tbl('src')+`<div class="two"><fieldset><legend>الدخل الشهري</legend><div class="g">${INC.map(([k,l])=>fld(k,l)).join('')}</div><div class="tot">الإجمالي: <span id="ti"></span></div></fieldset><fieldset><legend>المصروفات الشهرية</legend><div class="g">${EXP.map(([k,l])=>fld(k,l)).join('')}</div><div class="tot">الإجمالي: <span id="te"></span> — الفرق: <span id="tn"></span></div></fieldset></div>`,
+ tbl('aid')+sec(SEC[4])],nm=[cur.h_n,cur.w_n].filter(Boolean).join(' و ');
+ $('#v').innerHTML=`<div class="top"><button data-go>← القائمة</button><h2>${esc(nm)||'أسرة جديدة'}</h2><span><button data-pr>طباعة</button> ${acts()}</span></div>
+ <nav class="tabs">${TABS.map((t,i)=>`<button data-tab="${i}">${i+1}. ${t}</button>`).join('')}</nav>${pg.map(h=>`<div class="pg">${h}</div>`).join('')}
+ <div class="bar"><button id="prv" data-step="-1">السابق</button><button class="p" data-save>حفظ</button><button id="nxt" data-step="1">التالي</button></div>`;
+ tot();showTab(tb);scrollTo(0,y)}
+function tot(){const s=a=>a.reduce((t,[k])=>t+num(cur[k]),0),i=s(INC),e=s(EXP);$('#ti').textContent=i;$('#te').textContent=e;$('#tn').textContent=i-e}
+function acts(){let h=cid?`<small>[${ST[cst]}]</small> `:'';if(me.role=='admin'&&cid)h+='<button data-apv>اعتماد وتعيين</button> <button data-ret>إرجاع</button> <button class="d" data-rej>رفض</button>';if(cst=='returned')h+=' <button data-sub>إعادة إرسال</button>';return h}
+function loginView(m){$('#v').innerHTML=`<fieldset style="max-width:380px;margin:30px auto"><legend>تسجيل الدخول</legend><label>الإيميل<input id="em" type="email" autocomplete="username"></label><label>كلمة السر<input id="pw" type="password" autocomplete="current-password" onkeydown="if(event.key=='Enter')login()"></label><p id="le" style="color:var(--red)">${esc(m||'')}</p><button class="p" data-login>دخول</button></fieldset>`}
+async function login(){try{S=await api('/auth/v1/token?grant_type=password',{m:'POST',b:{email:$('#em').value.trim(),password:$('#pw').value}});sessionStorage.setItem('ik_s',JSON.stringify(S));await boot()}catch(e){S=null;$('#le').textContent=e.message}}
+function logout(m){S=null;me=null;sessionStorage.removeItem('ik_s');loginView(m)}
+async function boot(){try{const p=await api('/rest/v1/profiles?id=eq.'+S.user.id+'&select=id,name,role,active');me=p[0];if(!me||!me.active)throw new Error('الحساب غير مفعّل. كلّم المسئول.');flt=me.role=='admin'?'pending':'all';await load();list()}catch(e){if(e.message!='401')logout(e.message)}}
+async function load(){const a=await api('/rest/v1/families?select=id,data,status,return_note,updated_at&order=updated_at.desc');db=a.map(f=>({id:f.id,st:f.status,note:f.return_note,d:f.data}));reqs=await api('/rest/v1/my_requests?select=*')}
+function edit(id){const r=db.find(x=>x.id==id);cid=r?r.id:null;cst=r?r.st:'new';cur=JSON.parse(JSON.stringify(r?r.d:{children:[],others:[],src:[],aid:[],c:{}}));orig=JSON.parse(JSON.stringify(cur));tb=0;draw()}
+function list(){cur=null;$('#v').innerHTML=`<div class="top"><b>${esc(me.name)} (${me.role=='admin'?'مسئول':'خادم'})</b><span><button data-ref>تحديث</button> <button data-out>خروج</button></span></div><div class="row"><button class="p" data-new>+ أسرة جديدة</button><input id="q" placeholder="بحث بالاسم أو التليفون أو الرقم القومي" style="flex:1;min-width:200px"><select id="fs" style="width:auto">${['all',...Object.keys(ST)].map(k=>`<option value="${k}"${flt==k?' selected':''}>${k=='all'?'الكل':ST[k]}</option>`).join('')}</select></div><div id="L"></div>`;fl()}
+function fl(){const q=($('#q').value||'').trim(),a=db.filter(r=>(flt=='all'||r.st==flt)&&(!q||JSON.stringify(r.d).includes(q))),o=reqs.filter(r=>!db.some(x=>x.id==r.id)&&(flt=='all'||r.status==flt));
+ $('#L').innerHTML=`<p>${a.length+o.length} أسرة</p>`+a.map(r=>`<div class="card"><div><b>${esc(r.d.h_n||'—')} و ${esc(r.d.w_n||'—')}</b> <small>[${ST[r.st]}]</small><br><small>${esc(r.d.addr||'')} — أولاد: ${(r.d.children||[]).length}${r.note?' — ملاحظة: '+esc(r.note):''}</small></div><div><button data-open="${r.id}">فتح</button> <button data-prid="${r.id}">طباعة</button></div></div>`).join('')+o.map(r=>`<div class="card"><b>${esc(r.h_n||'—')} و ${esc(r.w_n||'—')}</b> <small>[${ST[r.status]}] اتعيّنت لخادم</small></div>`).join('')}
+async function sv(){if(!cur.h_n&&!cur.w_n){alert('اكتب اسم الزوج أو الزوجة على الأقل');return}
+ const bad=document.querySelectorAll('input.bad').length;if(bad&&!confirm('فيه '+bad+' رقم قومي مش 14 رقم. تحفظ برضه؟'))return;
+ try{if(!cid){const r=await api('/rest/v1/families',{m:'POST',b:{data:cur}});cid=r[0].id;cst='pending'}
+ else{const p={};for(const k of new Set([...Object.keys(cur),...Object.keys(orig)]))if(JSON.stringify(cur[k])!==JSON.stringify(orig[k]))p[k]=cur[k]===undefined?null:cur[k];if(Object.keys(p).length)await api('/rest/v1/rpc/patch_family',{m:'POST',b:{fid:cid,patch:p}})}
+ orig=JSON.parse(JSON.stringify(cur));await load();draw();alert('تم الحفظ')}catch(e){alert('تعذّر الحفظ: '+e.message)}}
+async function review(d,sv,note){try{await api('/rest/v1/rpc/review_family',{m:'POST',b:{fid:cid,decision:d,servants:sv||[],note:note||null}});await load();list()}catch(e){alert(e.message)}}
+async function sub(){try{await api('/rest/v1/rpc/submit_family',{m:'POST',b:{fid:cid}});await load();list()}catch(e){alert(e.message)}}
+async function apv(){try{const[s,a]=await Promise.all([api('/rest/v1/profiles?select=id,name&role=eq.servant&active=eq.true'),api('/rest/v1/family_servants?select=servant_id&family_id=eq.'+cid)]),on=a.map(x=>x.servant_id);
+ $('#m').innerHTML=`<div class="mb"><b>اختار الخدام المسئولين (من 1 لـ 3)</b>${s.map(x=>`<label><input type="checkbox" value="${x.id}"${on.includes(x.id)?' checked':''}> ${esc(x.name)}</label>`).join('')||'<p>مفيش خدام مسجّلين</p>'}<p><button class="p" data-do="apv">اعتماد</button> <button data-do="x">إلغاء</button></p></div>`;$('#m').style.display='flex'}catch(e){alert(e.message)}}
+function pr(r){const P=(a,b)=>`<tr><td><b>${a}</b></td><td>${esc(b)}</td></tr>`,pe=p=>F1.map(([k,l])=>P(l,r[p+k])).join('');
+ const T=t=>{const[h,cols]=TB[t],a=r[t]||[];return `<h2>${h}</h2><table><tr>${cols.map(c=>'<th>'+c[1]+'</th>').join('')}</tr>${a.map(x=>'<tr>'+cols.map(([k])=>'<td>'+esc(x[k])+'</td>').join('')+'</tr>').join('')||'<tr><td colspan="9">—</td></tr>'}</table>`};
+ const s=a=>a.reduce((t,[k])=>t+num(r[k]),0);
+ $('#pr').innerHTML=`<h1 style="text-align:center;font-size:18px;margin:0 0 6px">إخوة الرب — استمارة بحث حالة</h1><p>الكنيسة: ${esc(r.church)} — تاريخ البحث: ${esc(r.d1)} — تاريخ التجديد: ${esc(r.d2)} — رقم البحث: ${esc(r.no)}</p>
+ <table><tr><th>بيانات الزوج</th><th>بيانات الزوجة</th></tr><tr><td><table>${pe('h_')}</table></td><td><table>${pe('w_')}</table></td></tr></table>
+ <h2>العنوان والسكن</h2><table>${P('العنوان',r.addr)}${P('المحافظة / الحي / المنطقة',[r.gov,r.dist,r.area].filter(Boolean).join(' / '))}${P('علامة مميزة',r.mark)}${P('السكن',r.house)}</table>
+ ${T('children')}${T('others')}<h2>محتويات المنزل</h2><p>${CONT.map((n,i)=>n+': '+esc((r.c||{})[i]||'—')).join(' | ')}</p>
+ <h2>الحالة الصحية والظروف</h2><table>${P('أمراض',r.ill)}${P('إعاقة',r.dis)}${P('ظروف أخرى',r.oth)}</table>${T('src')}${T('aid')}
+ <h2>الدخل والمصروفات</h2><table><tr><th>الدخل</th><th></th><th>المصروفات</th><th></th></tr>${INC.map(([k,l],i)=>`<tr><td>${l}</td><td>${esc(r[k])}</td><td>${EXP[i][1]}</td><td>${esc(r[EXP[i][0]])}</td></tr>`).join('')}<tr><td><b>الإجمالي</b></td><td><b>${s(INC)}</b></td><td><b>الإجمالي</b></td><td><b>${s(EXP)}</b></td></tr></table>
+ <p>الأب الكاهن المسئول: ${esc(r.priest)}</p><table><tr><th>اسم الكاهن المسئول</th><th>التوقيع</th><th>التاريخ</th><th>الختم</th></tr><tr><td style="height:60px"></td><td></td><td></td><td></td></tr></table>`;print()}
+const V=$('#v');
+V.addEventListener('input',e=>{const t=e.target;if(t.id=='q')return fl();const p=t.dataset.p;if(!p)return;set(p,t.value);if(/(^|\.|_)id$/.test(p))t.classList.toggle('bad',!!t.value&&!/^\d{14}$/.test(t.value));if(/^[ie]_/.test(p))tot()});
+V.addEventListener('change',e=>{if(e.target.id=='fs'){flt=e.target.value;fl()}});
+V.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+ if('login' in d)login();else if('out' in d)logout();else if('ref' in d)load().then(list).catch(x=>alert(x.message));
+ else if('new' in d)edit();else if(d.open)edit(d.open);else if(d.prid)pr(db.find(r=>r.id==d.prid).d);
+ else if(d.add){cur[d.add].push({});draw()}else if(d.del){const[t,i]=d.del.split('.');cur[t].splice(i,1);draw()}
+ else if(d.tab!=null)showTab(+d.tab);else if(d.step)showTab(tb+ +d.step);else if('save' in d)sv();else if('pr' in d)pr(cur);else if('go' in d)list();
+ else if('apv' in d)apv();else if('ret' in d){const n=prompt('ملاحظة للخادم (مثلاً: ناقص الرقم القومي)');if(n!==null)review('return',[],n)}
+ else if('rej' in d){if(confirm('ترفض الأسرة دي؟'))review('reject')}else if('sub' in d)sub()});
+$('#m').addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!b.dataset.do)return;if(b.dataset.do=='apv'){const ids=[...$('#m').querySelectorAll('input:checked')].map(i=>i.value);if(!ids.length||ids.length>3){alert('اختار من 1 لـ 3 خدام');return}$('#m').style.display='none';review('approve',ids)}else $('#m').style.display='none'});
+S?boot():loginView();
+</script></body></html>
