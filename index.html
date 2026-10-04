@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>إخوة الرب — بحث الحالة</title>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>الأنبا كاراس — بحث الحالة</title>
 <style>
 :root{--ink:#1f2a37;--bg:#f3f5f7;--ac:#0f5c5c;--ln:#d5dbe0;--red:#b3261e}
 *{box-sizing:border-box}body{margin:0;font:15px/1.6 Tahoma,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
@@ -31,7 +31,7 @@ label{color:#5b6773;font-size:12.5px}input,select,textarea{min-height:40px}butto
 @media print{body>*:not(#pr){display:none!important}body{background:#fff}#pr{display:block;padding:8mm}#pr table{min-width:0}#pr td,#pr th{border-color:#000}#pr h2{margin:10px 0 4px;font-size:15px;border-bottom:2px solid #000}}
 .orig table{border-collapse:collapse;width:100%;margin:6px 0}.orig td,.orig th{border:1px solid #ccc;padding:3px 5px}.orig img{max-width:120px}
 </style></head><body>
-<header><h1>إخوة الرب — بحث الحالة</h1></header>
+<header><h1>الأنبا كاراس — بحث الحالة</h1></header>
 <main id="v"></main><div id="m"></div><div id="pr"></div>
 <datalist id="srcs"><option>تاكسي<option>كشك<option>محل<option>توك توك<option>فرشة<option>تريسكل<option>أنابيب بوتاجاز<option>معاش<option>مكنة خياطة وتطريز<option>ثلاجة مشروبات<option>تربية طيور</datalist>
 <script>
@@ -216,7 +216,7 @@ async function apv(){try{const[s,a]=await Promise.all([api('/rest/v1/profiles?se
 function pr(r){const P=(a,b)=>`<tr><td><b>${a}</b></td><td>${esc(b)}</td></tr>`,pe=p=>F1.map(([k,l])=>P(l,r[p+k])).join('');
  const T=t=>{const[h,cols]=TB[t],a=r[t]||[];return `<h2>${h}</h2><table><tr>${cols.map(c=>'<th>'+c[1]+'</th>').join('')}</tr>${a.map(x=>'<tr>'+cols.map(([k])=>'<td>'+esc(x[k])+'</td>').join('')+'</tr>').join('')||'<tr><td colspan="9">—</td></tr>'}</table>`};
  const s=a=>a.reduce((t,[k])=>t+num(r[k]),0);
- const cd=(db.find(x=>x.d===r)||db.find(x=>x.id==cid)||{}).code||'';$('#pr').innerHTML=`<h1 style="text-align:center;font-size:18px;margin:0 0 6px">إخوة الرب — استمارة بحث حالة</h1><p>كود الأسرة: ${esc(cd)} — الكنيسة: ${esc(r.church)} — تاريخ البحث: ${esc(r.d1)} — تاريخ التجديد: ${esc(r.d2)}</p>
+ const cd=(db.find(x=>x.d===r)||db.find(x=>x.id==cid)||{}).code||'';$('#pr').innerHTML=`<h1 style="text-align:center;font-size:18px;margin:0 0 6px">الأنبا كاراس — استمارة بحث حالة</h1><p>كود الأسرة: ${esc(cd)} — الكنيسة: ${esc(r.church)} — تاريخ البحث: ${esc(r.d1)} — تاريخ التجديد: ${esc(r.d2)}</p>
  <table><tr><th>بيانات الزوج</th><th>بيانات الزوجة</th></tr><tr><td><table>${pe('h_')}</table></td><td><table>${pe('w_')}</table></td></tr></table>
  <h2>العنوان والسكن</h2><table>${P('العنوان',r.addr)}${P('المحافظة / الحي / المنطقة',[r.gov,r.dist,r.area].filter(Boolean).join(' / '))}${P('علامة مميزة',r.mark)}${P('السكن',r.house)}</table>
  ${T('children')}${T('others')}<h2>محتويات المنزل</h2><p>${CONT.map((n,i)=>n+': '+esc((r.c||{})[i]||'—')).join(' | ')}</p>
